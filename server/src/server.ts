@@ -47,6 +47,8 @@ app.get('/project-list', async (req, res) => { //renderar projekt i admin tab
   }
   else {
     const projects = await getProjects();
+    console.log(projects);
+    
     res.json(projects);
   }
 });

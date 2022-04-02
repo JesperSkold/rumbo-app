@@ -4,3 +4,15 @@ db.createCollection('projects')
 db.createCollection('settings')
 db.createCollection('time_reports')
 db.createCollection('transactions')
+
+db.projects.insert({customer_name:"Åkeriet", project_name:"Hemsida akeriet.se", agreement_ref:"AK132", active:true, currentDate: new Date()})
+
+db.projects.insert({customer_name:"Storbanken", project_name:"Finanssystemet", agreement_ref:"AK345", active:true, currentDate: new Date()})
+
+--------------- utan ID blir projektid undefined pga hur de har byggt react appen ---------
+vvvv with ids ^^^^ without ids
+db.projects.insert({id:1, customer_name:"Åkeriet", project_name:"Hemsida akeriet.se", agreement_ref:"AK132", active:true, currentDate: new Date()})
+
+db.projects.insert({id:2, customer_name:"Storbanken", project_name:"systemet", agreement_ref:"AK345", active:true, currentDate: new Date()})
+
+db.projects.insert({id:3, customer_name:"Storbanken", project_name:"Finans", agreement_ref:"AK345", active:true, currentDate: new Date()})
