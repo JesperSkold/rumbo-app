@@ -1,0 +1,6 @@
+use rumbo
+db.createCollection('employees')
+db.createCollection('projects')
+db.createCollection('settings')
+db.createCollection('time_reports')
+db.createCollection('transactions')
