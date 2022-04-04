@@ -1,11 +1,13 @@
-import mongoose from "mongoose"
+import mongoose, {Schema} from "mongoose"
+import Iproject from '../interfaces/project'
 
-const projectSchema = new mongoose.Schema({
-  customer_name:String, 
-  project_name:String,
-  agreement_ref:String,
-  active:Boolean,
-  currentDate:Date
+const projectSchema: Schema = new Schema({
+  customer_name:{type: String, required: true}, 
+  project_name:{type: String, required:true},
+  agreement_ref:{type: String, required:true},
+  active:{type: String, required:true},
+  currentDate: {type: Date, required:true}
 })
 
-export default mongoose.model("Project", projectSchema)
+
+export default mongoose.model<Iproject>("Project", projectSchema)

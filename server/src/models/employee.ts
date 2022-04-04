@@ -1,10 +1,11 @@
-import mongoose from "mongoose"
+import mongoose, { Schema }from "mongoose"
+import Iemployee from "../interfaces/employee"
 
-const employeeSchema = new mongoose.Schema({
-  email:String, 
-  firstname:String,
-  lastname:String,
-  fullname:String
+const employeeSchema: Schema = new Schema({
+  email:{type: String, required: true}, 
+  firstname:{type: String, required:true},
+  lastname:{type: String, required:true},
+  fullname:{type: String, required:true}, //concat first & last?
 })
 
-export default mongoose.model("Employee", employeeSchema)
+export default mongoose.model<Iemployee>("Employee", employeeSchema)
