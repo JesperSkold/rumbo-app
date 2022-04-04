@@ -32,7 +32,7 @@ router.get("/:email/transaction", async (req, res) => {
 
 // TODO skapa en project route? 
 
-router.get("/:email/timereport", async (req, res) => {
+router.get("/:email/timereport", async (req, res) => { // "renderar" timmar tabben
 
 
   if (req.params.email != req["user"] && !req["isAdmin"]) {
@@ -40,6 +40,9 @@ router.get("/:email/timereport", async (req, res) => {
   } else {
     let filter: any = {
       email: req.params.email,
+      /*
+        
+      */
     };
 
     if (req.query.user) {

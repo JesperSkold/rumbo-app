@@ -1,5 +1,6 @@
 import { query } from "./db";
 import { TimeReport } from "../types";
+import TimeReportModel from "../models/timereport"
 
 type getTimeReportFilter = {
     email?: string;
@@ -14,11 +15,12 @@ export const getTimeReport = async ({
     month,
     project,
 }: getTimeReportFilter) => {
-    let where = [];
-    let params = [];
+    let where = []; //['email = $1', 'DATE_PART('year',"time") = 2', 'DATE_PART('month',"time") = 3', 'project_id = 4' ]
+    let params = []; // ['celly.com', '1999', '04', 'dressman']
     if (email) {
         params.push(email);
         where.push(`email = $${params.length}`);
+
     }
     if (year) {
         params.push(year);
@@ -33,11 +35,15 @@ export const getTimeReport = async ({
         where.push(`project_id = $${params.length}`);
     }
 
-    const whereClause = !where.length ? "" : "WHERE " + where.join(" AND ");
-    const sqlQuery = `SELECT * FROM (SELECT id, email, time, description, hours, project_id FROM public.time_reports) AllTimeReports ${whereClause}`;
-    return query(sqlQuery, params).then(res => res as TimeReport[]);
+    const whereClause = !where.length ? "" : "WHERE " + where.join(" AND "); // WHERE EMAIL = $1 AND DATE_PART('year',"time") = 2' AND  'DATE_PART('month',"time") = 3 //DATE PART LÄGGER I HOPP ALLT TILL TIME VARIABLE
+    const sqlQuery = `SELECT * FROM (SELECT id, email, time, description, hours, project_id FROM public.time_reports) AllTimeReports ${whereClause}`; // VAD ÄR ALLTIMEREPORTS? ALIAS?
+    return query(sqlQuery, params).then(res => res as TimeReport[]); //SELECT id, email, time, description, hours, project_id FROM public.time_reports HAMNAR I TIMEREPORT TYPEN
 };
-
+        /* 
+        
+        const whereClause = db.find({email:email, /$dateToPart, project:project})
+        DB.FIND email:email, time: `${year}-${month}, project:project`
+        */
 export const getTimeReportById = async (timereportId: number) => {
     const sqlQuery = `SELECT * FROM public.time_reports WHERE id = $1`;
     const result = await query(sqlQuery, [timereportId]);
@@ -59,6 +65,14 @@ export const getTimeReportMeta = async (email: string) => {
                         UNION (SELECT NOW() as time)) as nested
                     GROUP BY EXTRACT(month from time), EXTRACT(year from time)
                     ORDER BY year, month`;
+
+    /*
+        export const getTimeReportMeta = async (
+            email: string
+        ) => {
+            const timeReports = await TimeReportModel.find({})
+        }
+    */
     const res: any = await query(sqlQuery, [email]);
     return res.map(meta => ({ year: Number(meta.year), month: Number(meta.month) }));
 

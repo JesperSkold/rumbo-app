@@ -19,6 +19,9 @@ export const getTransactions = async ({
   if (email) {
     params.push(email);
     where.push(`email = $${params.length}`);
+    /*
+
+    */
   }
   if (year) {
     params.push(year);

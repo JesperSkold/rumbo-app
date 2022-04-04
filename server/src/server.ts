@@ -8,6 +8,7 @@ import { getDescriptionsByEmail } from "./db/description";
 import mongoose from "mongoose"
 mongoose.connect('mongodb://localhost:27017/rumbo').catch(err => console.log(err));
 
+
 import userRouter from './routes/user';
 import transactionRouter from './routes/transaction';
 import vismaRouter from './routes/visma';
@@ -67,6 +68,8 @@ app.get('/user/:email/description', async (req, res) => {
     res.send(401).end();
   } else {
     const response: any = await getDescriptionsByEmail(req.params.email);
+    console.log(response, "<-- DESCRIPIONS");
+    
     res.json(response.map((transaction: any) => transaction.description));
   }
 });
