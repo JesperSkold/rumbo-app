@@ -31,7 +31,6 @@ router.get("/:email/transaction", async (req, res) => {
 });
 
 // TODO skapa en project route? 
-
 router.get("/:email/timereport", async (req, res) => { // "renderar" timmar tabben
 
 
@@ -46,7 +45,7 @@ router.get("/:email/timereport", async (req, res) => { // "renderar" timmar tabb
     };
 
     if (req.query.user) {
-      console.log(req["user"]);
+      console.log(req["user"]); 
     }
     if (req.query.year) {
       filter.year = req.query.year;
