@@ -33,16 +33,22 @@ router.post("/timereport", async (req, res) => {
     }
 
     const newTimeReport = await addTimeReport({
+      id: req.body.id,
       email: req.body.email,
       time: req.body.time,
       description: req.body.description,
       hours: req.body.hours,
       project_id: req.body.project_id
     }) as TimeReport;
-
-    const mapTimeReportData = { ...newTimeReport[0], hours: Number(newTimeReport[0].hours) };
+    console.log(newTimeReport, "NEWTIMEREPORT ROUTER");
+    let timeReportArr = []
+    timeReportArr.push(newTimeReport)
+    console.log(timeReportArr);
+    
+    const mapTimeReportData = { ...timeReportArr[0], hours: Number(timeReportArr[0].hours) };
     delete mapTimeReportData.created_at;
-    res.json(mapTimeReportData);
+    res.json(mapTimeReportData["_doc"]);
+    // res.json(mapTimeReportData);
   }
 });
 

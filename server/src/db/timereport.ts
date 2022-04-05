@@ -8,7 +8,14 @@ type getTimeReportFilter = {
 	month?: number;
 	project?: string;
 };
-
+/**
+ db.timereport.aggregate([
+	 db.timereport.find({'id', 'email': email, 'time', 'descriptions', 'hours', project_id})
+	 {
+		$dateFromParts:{'email': email, 'year': year, 'month': month, 'project': project} 
+	 }
+ ])
+ */
 export const getTimeReport = async ({ email, year, month, project }: getTimeReportFilter) => {
 	let where = []; //['email = $1', 'DATE_PART('year',"time") = 2', 'DATE_PART('month',"time") = 3', 'project_id = 4' ]
 	let params = []; // ['celly.com', '1999', '04', 'dressman']
@@ -83,17 +90,31 @@ export const getTimeReportMeta = async (email: string) => {
 	return res.map((meta) => ({ year: Number(meta.year), month: Number(meta.month) }));
 };
 
-export const addTimeReport = (timeReport: TimeReport) => {
-	return query('INSERT INTO public.time_reports(email, "time", description, hours, project_id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [
-		timeReport.email,
-		timeReport.time,
-		timeReport.description,
-		timeReport.hours,
-		timeReport.project_id,
-	]);
+export const addTimeReport = async (timeReport: TimeReport) => { //do next
+    console.log(timeReport);
+    
+    const createdTimeReport = await TimeReportModel.create({
+        id: timeReport.id,
+        email: timeReport.email,
+        time: timeReport.time,
+        description: timeReport.description,
+        hours: timeReport.hours,
+        'project_id': timeReport.time,
+    })
+    console.log(createdTimeReport);
+    createdTimeReport.save()
+    
+    return createdTimeReport
+	// return query('INSERT INTO public.time_reports(email, "time", description, hours, project_id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [
+	// 	timeReport.email,
+	// 	timeReport.time,
+	// 	timeReport.description,
+	// 	timeReport.hours,
+	// 	timeReport.project_id,
+	// ]);
 };
 
-export const updateTimeReport = (timeReport: TimeReport) => {
+export const updateTimeReport = (timeReport: TimeReport) => { //do next
 	return query("UPDATE public.time_reports SET email = $1, time = $2, description = $3, hours = $4, project_id = $5 WHERE id = $6 RETURNING *", [
 		timeReport.email,
 		timeReport.time,

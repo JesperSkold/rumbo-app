@@ -1,5 +1,6 @@
 import { query } from "./db";
 import { Transaction, TransactionStatus } from "../types";
+import TransactionModel from "../models/transaction";
 
 type getTransactionFilter = {
   email?: string;
@@ -7,6 +8,16 @@ type getTransactionFilter = {
   month?: number;
   description?: string;
 };
+
+/**
+ * db.transaction.aggregate([
+  db.transaction.find({'email':}, 'year', 'month', 'desscription'})
+ 
+   {
+      $dateFromParts:{'year': year, 'month': month, }
+   }
+  ])
+ */
 
 export const getTransactions = async ({
   email,
@@ -42,14 +53,12 @@ export const getTransactions = async ({
 };
 
 export const getTransactionById = async (transactionId: number) => {
-  const sqlQuery = `SELECT * FROM public.transactions WHERE id = $1`;
-  const result = await query(sqlQuery, [transactionId]);
+  const result = TransactionModel.find({'id': transactionId})
   return result['length'] === 0 ? null : result[0];
 };
 
 export const deleteTransactionById = async (transactionId: number) => {
-  const sqlQuery = `DELETE FROM public.transactions WHERE id = $1`;
-  await query(sqlQuery, [transactionId]);
+  await TransactionModel.deleteOne({'id': transactionId})
 };
 
 export const getTransactionsMeta = async (email: string) => {
