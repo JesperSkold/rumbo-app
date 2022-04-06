@@ -7,7 +7,7 @@ import { Document } from "mongoose"
 //   description:string,
 //   created_at: Date,
 //   project_id:string
-// }//email, time, hours, description, created_at, projekt_id LÄGG TILL
+// }
 export default interface Itimereport extends Document {
   id?: number,
   email: string;
@@ -15,4 +15,4 @@ export default interface Itimereport extends Document {
   description: string;
   hours: number;
   project_id: number;
-}//email, time, hours, description, created_at, projekt_id LÄGG TILL
+}

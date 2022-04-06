@@ -43,7 +43,6 @@ router.post("/timereport", async (req, res) => {
     console.log(newTimeReport, "NEWTIMEREPORT ROUTER");
     let timeReportArr = []
     timeReportArr.push(newTimeReport)
-    console.log(timeReportArr);
     
     const mapTimeReportData = { ...timeReportArr[0], hours: Number(timeReportArr[0].hours) };
     delete mapTimeReportData.created_at;

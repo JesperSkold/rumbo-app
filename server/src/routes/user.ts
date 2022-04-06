@@ -57,7 +57,7 @@ router.get("/:email/timereport", async (req, res) => { // "renderar" timmar tabb
       filter.project = req.query.project_id;
     }
     const timeReport = await getTimeReport(filter);
-    console.log(timeReport);
+    console.log(timeReport, "<----TIME REPORTS");
     const mappedReports = timeReport.map((timereport) => ({ ...timereport, hours: Number(timereport.hours) }))
     res.json(mappedReports);
   }

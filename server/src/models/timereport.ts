@@ -4,11 +4,11 @@ import Itimereport from "../interfaces/timereport"
 const timereportSchema: Schema = new Schema({
   id: {type: Number},
   email:{type: String, required: true}, 
-  time:{type: String, required:true},
-  hours:{type: Number, required:true},
+  time:{type: Date, required:true},
   description:{type: String, required: true},
+  hours:{type: Number, required:true},
   // created_at:{type: Date, required: true},
-  project_id:{type: String, required:true}, 
+  project_id:{type: Number, required:true}, 
 })
 
 export default mongoose.model<Itimereport>("time_report", timereportSchema)

@@ -11,7 +11,7 @@ type getTransactionFilter = {
 
 /**
  * db.transaction.aggregate([
-  db.transaction.find({'email':}, 'year', 'month', 'desscription'})
+  db.transaction.find({'email':}, 'year', 'month', 'description'})
  
    {
       $dateFromParts:{'year': year, 'month': month, }
@@ -58,9 +58,16 @@ export const getTransactionById = async (transactionId: number) => {
 };
 
 export const deleteTransactionById = async (transactionId: number) => {
-  await TransactionModel.deleteOne({'id': transactionId})
+  await TransactionModel.deleteOne({'id': transactionId}) 
 };
 
+/*
+export const getTransactionsMeta = async (email: string) => {
+  const result = await TransactionModel.find({
+ 
+  })
+}
+*/
 export const getTransactionsMeta = async (email: string) => {
   const sqlQuery = `SELECT
                       EXTRACT(year from time) as year,
