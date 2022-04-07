@@ -8,25 +8,13 @@ type getTimeReportFilter = {
 	month?: number;
 	project?: string;
 };
-/**
- db.timereport.aggregate([
-	 db.timereport.find({'id', 'email': email, 'time', 'descriptions', 'hours', project_id})
-	 time:{
-{
-		$dateFromParts:{'year': year, 'month': month} 
-	 }
-	 }
-	 
- ])
- */
 
- /*
- 	
-  db.timereport.find({'id', 'email': email, 'time', 'descriptions', 'hours', project_id})
-  */
+
+
+
 export const getTimeReport = async ({ email, year, month, project }: getTimeReportFilter) => {
 	// let where = []; //['email = $1', 'DATE_PART('year',"time") = 2', 'DATE_PART('month',"time") = 3', 'project_id = 4' ]
-	// let params = []; // ['celly.com', '1999', '04', 'dressman']
+	// let params = []; // 
 	// if (email) {
 	// 	params.push(email);
 	// 	where.push(`email = $${params.length}`);
@@ -44,98 +32,75 @@ export const getTimeReport = async ({ email, year, month, project }: getTimeRepo
 	// 	where.push(`project_id = $${params.length}`);
 	// }
 
-	// const whereClause = !where.length ? "" : "WHERE " + where.join(" AND "); // WHERE EMAIL = $1 AND DATE_PART('year',"time") = 2' AND  'DATE_PART('month',"time") = 3 //DATE PART LÄGGER I HOPP ALLT TILL TIME VARIABLE
+	// const whereClause = !where.length ? "" : "WHERE " + where.join(" AND "); // WHERE EMAIL = $1 AND DATE_PART('year',"time") = 2' AND  'DATE_PART('month',"time") = 3 
 	// const sqlQuery = `SELECT * FROM (SELECT id, email, time, description, hours, project_id FROM public.time_reports) AllTimeReports ${whereClause}`; // VAD ÄR ALLTIMEREPORTS? ALIAS?
 	// console.log(sqlQuery, "QUERY");
 	// console.log(params, "PARAMS");
-	// return query(sqlQuery, params).then((res) => res as TimeReport[]); //SELECT id, email, time, description, hours, project_id FROM public.time_reports HAMNAR I TIMEREPORT TYPEN
-	// const timeReports = await TimeReportModel.find({email:email}) //använd MATCH timeReports.aggregate
-	// console.log(timeReports, "MONGO TIMEREPORTS");
-	// const lol = TimeReportModel.aggregate([time: {$dateFromParts: {'year':year, 'month':month}}])
-	// const timeReports = TimeReportModel.aggregate([
-	// 	{$match:
-	// 	 {}
-	// 	},
-	// 	{$group:{_id: '$email', time: {$dateFromParts: {'year':year, 'month':month}}}}
-	// 	// time: {$dateFromParts: {'year':year, 'month':month}}
-	// ]).then((res) => res as TimeReport[])
-	// return timeReports
-
-	// const timeReports = TimeReportModel.aggregate([
-	// 	{
-	// 		time: {
-	// 				$dateFromString: {
-
-	// 			}
-	// 		}
-	// 	}
-	// ])
-
-
-// const yearMonth = `${year}-${month}`
-// const timeReports = TimeReportModel.find({email:email, time:{$regex: yearMonth}}).then((res) => res as TimeReport[])
-// console.log(timeReports);
+	// return query(sqlQuery, params).then((res) => res as TimeReport[]); //SELECT id, email, time, description, hours, 
 let queries = {}
 if (email) {
-	queries['email'] = email
+	queries['email'] = email 
 }
-if(year){
-	queries['year'] = year
+if(year && !month){
+	queries['time'] = {$gt: new Date(year, 0, 1), $lt: new Date(year+1, 0, 1)}
 }
-if(month){
-	queries['month'] = month
+if(month && year){
+	queries['time'] = {$gt: new Date(year, month-1, 1), $lt: new Date(year, month, 1)}
 }
 if(project){
 	queries['project'] = project
 }
-return TimeReportModel.find(queries)
-// return timeReports 
-// console.log(year, "ÅR");
-// console.log(month, "MÅNAD");
+return await TimeReportModel.find(queries)
+// return await TimeReportModel.find({time: {$gt: new Date(), $lt: new Date()}})
+// return await TimeReportModel.find({email:email})
+// let lol
+// if (month && year) {
+// 	lol = await TimeReportModel.find({time:{$where : `return this.time.getMonth() == ${month}`, `return this.time.getYear() == ${month}`}})
+// }else if(month){
+// 	lol = await TimeReportModel.find({$where : `return this.time.getMonth() == ${month}`})
+// }else if(year){
+// 	lol = await TimeReportModel.find({$where : `return this.time.getYear() == ${month}`})
+// }
+// const lol = await TimeReportModel.find({$where : `return this.time.getMonth() == ${month}`})
+// console.log(month);
+// console.log(year);
 
+// const lol = await TimeReportModel.find({})
+// console.log(lol, "AEWWWE");
+// return lol
+//
+// return await TimeReportModel.find({$where : `return this.date.getMonth() == ${month}`})
 // 	const timeReports = TimeReportModel.aggregate([
 // 		{$match:
 // 		 {email:email, time: new Date(`${year}-${month}-06T22:00:00.000Z`)}
 // 		}]).then((res) => res as TimeReport[])
 // 		return timeReports
-	// {$group:{_id: '$email', time: {$dateFromParts: {'year':year, 'month':month}}}}
-	// time: {$dateFromParts: {'year':year, 'month':month}}	
+
+// return await TimeReportModel.find({time: {$gt: new Date(), $lt: new Date()}})
 }
 
-
-
-/*
-TimeReportModel.aggregate([
-	{$match:
-	 {email:email}
-	},{$dateFromParts: {'year':year, 'month':year}}
-])
-/*
-        db.transactions.find({email:email, }).then(res => res as TimeReport[]) 
-        const whereClause = db.find({email:email, /$dateToPart, project:project})
-        DB.FIND({email:email, time: `${year}-${month}, project:project`})
-        */
-export const getTimeReportById = async (timeReportId: number) => {
-    const result = await TimeReportModel.find({id: timeReportId})
+export const getTimeReportById = async (timeReportId: string) => {
+	console.log(timeReportId)
+    const result = await TimeReportModel.find({_id: timeReportId}) //Change ID
     console.log(result["length"], "<---- LNGTH");
     
-	return result["length"] === 0 ? null : result[0]; // replace result["length"]??
-	/*
-    
-    db.transactions.find({}).then(res)
-    */
+	return result["length"] === 0 ? null : result[0];
+	
+
 };
 
 
 
-export const deleteTimeReportById = async (timeReportId: number) => {
-	await TimeReportModel.deleteOne({ id: timeReportId });
+export const deleteTimeReportById = async (timeReportId: string) => {
+	await TimeReportModel.deleteOne({ _id: timeReportId }); //Change ID
 };
+
 
 /*
-
+export const getTimeReportMeta = async (email: string) => {
+	const result = await TimeReportModel.find({ })
+}
 */
-
 export const getTimeReportMeta = async (email: string) => {
 	const sqlQuery = `SELECT
                         EXTRACT(year from time) as year,
@@ -189,6 +154,6 @@ export const updateTimeReport = (timeReport: TimeReport) => { //do next
 		timeReport.description,
 		timeReport.hours,
 		timeReport.project_id,
-		timeReport.id,
+		timeReport._id,
 	]);
 };

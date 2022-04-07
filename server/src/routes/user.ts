@@ -58,8 +58,11 @@ router.get("/:email/timereport", async (req, res) => { // "renderar" timmar tabb
     }
     const timeReport = await getTimeReport(filter);
     console.log(timeReport, "<----TIME REPORTS");
-    const mappedReports = timeReport.map((timereport) => ({ ...timereport, hours: Number(timereport.hours) }))
-    res.json(mappedReports);
+    // let timeReportArr = []
+    // timeReportArr.push(timeReport)
+    // const mappedReports = timeReportArr.map((timereport) => ({ ...timereport, hours: Number(timereport.hours) }))
+    // res.json(mappedReports["_doc"]);
+    res.json(timeReport);
   }
 
 });

@@ -6,14 +6,13 @@ export const getProjects = async (
     email?: string
 ) => {
     if (email) {
-        console.log("email");
-        
-        // Project.find FIX so when email exists: whereClause = `WHERE public.employees.email = $1`;
-//         params = [ email ]
+        console.log(email, "GETPROJECTS EMAIL EXISTS");
+        const projects = await Project.find({email:email}, {id: true,project_name:true})
+        return projects
+    }else{
+        const projects = await Project.find({}, {id: true,project_name:true})
+        return projects
     }
-    const projects = await Project.find({}, {id: true,project_name:true,})
-    
-    return projects
 }
 
 // export const getProjects = async (

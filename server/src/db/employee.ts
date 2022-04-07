@@ -1,6 +1,5 @@
 // import { query } from "./db";
 // import mongoose from "mongoose"
-import e from "express";
 import Employee from "../models/employee"
 
 // const employeeSchema = new mongoose.Schema({email:String, firstname:String, lastname:String, fullname:String})
@@ -15,6 +14,6 @@ export const getEmployees = async () => {
 // export const getEmployees = async () => {
 //     const sqlQuery = `SELECT * FROM public.employees`;
 //     return await query(sqlQuery);
-// };
+// }; 
 
 

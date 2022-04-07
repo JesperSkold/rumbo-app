@@ -9,7 +9,7 @@ import { Document } from "mongoose"
 //   project_id:string
 // }
 export default interface Itimereport extends Document {
-  id?: number,
+  id?: string,
   email: string;
   time: Date;
   description: string;
