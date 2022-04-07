@@ -2,7 +2,6 @@ import mongoose, { Schema }from "mongoose"
 import Itimereport from "../interfaces/timereport"
 
 const timereportSchema: Schema = new Schema({
-  id: {type: String},
   email:{type: String, required: true}, 
   time:{type: Date, required:true},
   description:{type: String, required: true},
@@ -22,5 +21,4 @@ export default mongoose.model<Itimereport>("time_report", timereportSchema)
   created_at: Date,
   project_id:string
 
-  
 */

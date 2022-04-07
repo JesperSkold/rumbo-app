@@ -33,7 +33,6 @@ router.post("/timereport", async (req, res) => {
     }
 
     const newTimeReport = await addTimeReport({
-      _id: req.body._id,
       email: req.body.email,
       time: req.body.time,
       description: req.body.description,
@@ -67,7 +66,6 @@ router.put("/:email/timereport/:id", async (req, res) => {
       hours: req.body.hours,
       description: req.body.description,
       project_id: req.body.project_id,
-      _id: req.body._id
     });
 
     res.json(updatedTimeReport);

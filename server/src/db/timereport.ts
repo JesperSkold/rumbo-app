@@ -80,7 +80,7 @@ return await TimeReportModel.find(queries)
 }
 
 export const getTimeReportById = async (timeReportId: string) => {
-	console.log(timeReportId)
+	console.log(timeReportId, "FROM ID")
     const result = await TimeReportModel.find({_id: timeReportId}) //Change ID
     console.log(result["length"], "<---- LNGTH");
     
@@ -92,6 +92,7 @@ export const getTimeReportById = async (timeReportId: string) => {
 
 
 export const deleteTimeReportById = async (timeReportId: string) => {
+	console.log(timeReportId, "FROM ID")
 	await TimeReportModel.deleteOne({ _id: timeReportId }); //Change ID
 };
 
