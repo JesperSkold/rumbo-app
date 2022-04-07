@@ -35,6 +35,8 @@ export const getTimeReportsMeta = (jwtToken: string, email: string) => {
 
 export const postTimeReport = (jwtToken: string,
     timeReport: TimeReport) => {
+        console.log(timeReport, "FROMPOST");
+        
     return fetch(`${process.env.REACT_APP_API_BASE_URL}/timeReport`, {
         method: 'POST',
         body: JSON.stringify(timeReport),
@@ -43,7 +45,8 @@ export const postTimeReport = (jwtToken: string,
 };
 
 export const updateTimeReport = (jwtToken: string, timeReport: TimeReport) => {
-    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport.id}`, {
+    console.log(timeReport, "FROMPOST");
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport._id}`, {
         method: 'PUT',
         body: JSON.stringify(timeReport),
         headers: { authorization: `bearer ${jwtToken}`, 'Content-Type': 'application/json' },
@@ -51,7 +54,7 @@ export const updateTimeReport = (jwtToken: string, timeReport: TimeReport) => {
 };
 
 export const deleteTimeReport = (jwtToken: string, timeReport: TimeReport) => {
-    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport.id}`, {
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport._id}`, {
         method: 'DELETE',
         headers: { authorization: `bearer ${jwtToken}`, 'Content-Type': 'application/json' },
     }).then((res: any) => res.json());

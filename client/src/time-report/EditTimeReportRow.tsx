@@ -67,12 +67,14 @@ const EditTimeReportRow = ({
  
   const submitTimeReport = (timeReport: TimeReport) => {
     if (isFormValid(timeReport)) {
-
-      if (timeReport.id > 0) {
-        dispatch(saveUpdatedTimeReport(timeReport));
-      } else {
+      console.log(timeReport, "FORM IS VALID")
+      // if (timeReport._id === "") {
+      //   console.log(timeReport, "TIMEREPORT ID IS EMPTY STRING")
+      //   dispatch(saveUpdatedTimeReport(timeReport));
+      // } else {
+        // console.log(timeReport, "SAVING TIME REPORT")
         saveTimeReport(timeReport);
-      }
+      // }
     }
   };
 
@@ -113,7 +115,7 @@ const EditTimeReportRow = ({
   };
 
   return (
-    <Table.Row key={timeReport.id}>
+    <Table.Row key={timeReport._id}>
       <Table.Cell maxWidth="125px">
         <EvergreenDatePicker
           selectedTime={date}
