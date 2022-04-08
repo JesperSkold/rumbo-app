@@ -147,13 +147,18 @@ export const addTimeReport = async (timeReport: TimeReport) => { //do next
 	// ]);
 };
 
-export const updateTimeReport = (timeReport: TimeReport) => { //do next
-	return query("UPDATE public.time_reports SET email = $1, time = $2, description = $3, hours = $4, project_id = $5 WHERE id = $6 RETURNING *", [
-		timeReport.email,
-		timeReport.time,
-		timeReport.description,
-		timeReport.hours,
-		timeReport.project_id,
-		timeReport._id,
-	]);
+export const updateTimeReport = async (timeReport: TimeReport, id:string) => { //do next
+	const doc = await TimeReportModel.findOneAndUpdate( timeReport)
+	// const doc = await TimeReportModel.find({'project_id':timeReport.project_id})
+	// console.log(doc);
+	
+	return doc //returning object that was changed, is it the correct way to do it?
+	// return query("UPDATE public.time_reports SET email = $1, time = $2, description = $3, hours = $4, project_id = $5 WHERE id = $6 RETURNING *", [
+	// 	timeReport.email,
+	// 	timeReport.time,
+	// 	timeReport.description,
+	// 	timeReport.hours,
+	// 	timeReport.project_id,
+	// 	timeReport._id,
+	// ]);
 };

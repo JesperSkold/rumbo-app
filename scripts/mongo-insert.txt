@@ -4,7 +4,6 @@ db.createCollection('projects')
 db.createCollection('settings')
 db.createCollection('time_reports')
 db.createCollection('transactions')
-
 db.projects.insert({customer_name:"Åkeriet", project_name:"Hemsida akeriet.se", agreement_ref:"AK132", active:true, currentDate: new Date()})
 
 db.projects.insert({customer_name:"Storbanken", project_name:"Finanssystemet", agreement_ref:"AK345", active:true, currentDate: new Date()})

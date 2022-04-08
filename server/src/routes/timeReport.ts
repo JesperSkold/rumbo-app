@@ -51,12 +51,17 @@ router.post("/timereport", async (req, res) => {
 });
 
 router.put("/:email/timereport/:id", async (req, res) => {
+console.log(req.body, "HI FROM REQ BODY");
 
   if (req.body.email != req["user"] && !req["isAdmin"]) {
+    console.log("ERROR FROM 56");
+    
     res.sendStatus(401).end();
   } else {
     const errors = validationResult(req);
+    console.log(validationResult(req), "error from validation 62");
     if (!errors.isEmpty()) {
+      
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -66,8 +71,10 @@ router.put("/:email/timereport/:id", async (req, res) => {
       hours: req.body.hours,
       description: req.body.description,
       project_id: req.body.project_id,
-    });
-
+    }, req.params.id);
+    console.log(updatedTimeReport, "UPDATEDTIMEREPORT");
+    console.log(req.params.id, "HELLO PARAMS ID");
+    
     res.json(updatedTimeReport);
   }
 });

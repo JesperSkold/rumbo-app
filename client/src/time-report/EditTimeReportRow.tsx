@@ -68,7 +68,7 @@ const EditTimeReportRow = ({
   const submitTimeReport = (timeReport: TimeReport) => {
     if (isFormValid(timeReport)) {
       console.log(timeReport, "FORM IS VALID")
-      // if (timeReport._id === "") {
+      // if (timeReport._id === "") { //.length > 0
       //   console.log(timeReport, "TIMEREPORT ID IS EMPTY STRING")
       //   dispatch(saveUpdatedTimeReport(timeReport));
       // } else {

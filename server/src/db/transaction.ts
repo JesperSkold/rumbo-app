@@ -9,15 +9,24 @@ type getTransactionFilter = {
   description?: string;
 };
 
-/**
- * db.transaction.aggregate([
-  db.transaction.find({'email':}, 'year', 'month', 'description'})
- 
-   {
-      $dateFromParts:{'year': year, 'month': month, }
-   }
-  ])
- */
+/*
+export const getTransactions = async ({email, year, month, description} : getTransactionsFilter) => {
+let queries = {}
+if (email) {
+	queries['email'] = email 
+}
+if(year && !month){
+	queries['time'] = {$gt: new Date(year, 0, 1), $lt: new Date(year+1, 0, 1)}
+}
+if(month && year){
+	queries['time'] = {$gt: new Date(year, month-1, 1), $lt: new Date(year, month, 1)}
+}
+if(description){
+  queries['description'] = {$toLower:description} 
+}
+return await TransactionModel.find(queries)
+}
+*/
 
 export const getTransactions = async ({
   email,
