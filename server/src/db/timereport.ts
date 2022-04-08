@@ -102,27 +102,26 @@ export const getTimeReportMeta = async (email: string) => {
 	const result = await TimeReportModel.find({ })
 }
 */
-export const getTimeReportMeta = async (email: string) => {
-	const sqlQuery = `SELECT
-                        EXTRACT(year from time) as year,
-                        EXTRACT(month from time) as month
-                    FROM
-                        ((SELECT time FROM time_reports WHERE email = 
-                        $1)
-                        UNION (SELECT NOW() as time)) as nested
-                    GROUP BY EXTRACT(month from time), EXTRACT(year from time)
-                    ORDER BY year, month`;
+// export const getTimeReportMeta = async (email: string) => {
+// 	const sqlQuery = `SELECT
+//                         EXTRACT(year from time) as year,
+//                         EXTRACT(month from time) as month
+//                     FROM
+//                         ((SELECT time FROM time_reports WHERE email = 
+//                         $1)
+//                         UNION (SELECT NOW() as time)) as nested
+//                     GROUP BY EXTRACT(month from time), EXTRACT(year from time)
+//                     ORDER BY year, month`;
 
-	/*
-        export const getTimeReportMeta = async (
-            email: string
-        ) => {
-            const timeReports = await TimeReportModel.find({})
-        }
-    */
-	const res: any = await query(sqlQuery, [email]);
-	return res.map((meta) => ({ year: Number(meta.year), month: Number(meta.month) }));
-};
+// 	const res: any = await query(sqlQuery, [email]);
+// 	return res.map((meta) => ({ year: Number(meta.year), month: Number(meta.month) }));
+// };
+
+export const getTimeReportMeta = async (email: string) => {
+	const res = await TimeReportModel.aggregate([ {$match: {'email': email}}, {$group: { _id: {year: {$year: "$time" }, month: {$month: "$time"}}}}])
+	return res.map(meta => ({year: Number(meta._id.year), month: Number(meta._id.month)}))
+}
+
 
 export const addTimeReport = async (timeReport: TimeReport) => { //do next
     console.log(timeReport, "<--TIME REPORT");
