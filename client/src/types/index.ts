@@ -23,7 +23,7 @@ export type TimeReport = {
   time: Date;
   description: string;
   hours: number;
-  project_id: number;
+  project_id: string;
   editMode?: boolean;
 };
 

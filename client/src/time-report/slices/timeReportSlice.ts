@@ -132,7 +132,7 @@ const timeReportSlice = createSlice({
         hours: 0,
         _id: "",
         email: '',
-        project_id: 0,
+        project_id: "",
         editMode: true
       }
       console.log(newTimeReport, "addnew payloadaction");

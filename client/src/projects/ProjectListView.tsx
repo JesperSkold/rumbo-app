@@ -34,8 +34,9 @@ const ProjectListView = ({ user }: ProjectViewType) => {
 
 
   //Funktion för rendera om till ProjectView 
-  const getProjectView = (id: number) => {
-
+  const getProjectView = (id: string) => {
+    console.log(id, "ID FROM GETPROJECTVIEW");
+    
     dispatch(push(`/project/${id}`))
   }
 
@@ -50,7 +51,7 @@ const ProjectListView = ({ user }: ProjectViewType) => {
         marginTop="10px"
       />
 
-      {projects.map(project => <TableRow isSelectable onSelect={() => getProjectView(project.id)}><Table.TextCell>{project.project_name}</Table.TextCell></TableRow>)}
+      {projects.map(project => <TableRow isSelectable onSelect={() => getProjectView(project._id)}><Table.TextCell>{project.project_name}</Table.TextCell></TableRow>)}
 
       <Pane
         clearfix

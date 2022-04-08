@@ -7,7 +7,7 @@ const timereportSchema: Schema = new Schema({
   description:{type: String, required: true},
   hours:{type: Number, required:true},
   // created_at:{type: Date, required: true},
-  project_id:{type: Number, required:true}, 
+  project_id:{type: String, required:true}, 
 })
 
 export default mongoose.model<Itimereport>("time_report", timereportSchema)

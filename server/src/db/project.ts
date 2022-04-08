@@ -7,10 +7,10 @@ export const getProjects = async (
 ) => {
     if (email) {
         console.log(email, "GETPROJECTS EMAIL EXISTS");
-        const projects = await Project.find({email:email}, {id: true,project_name:true})
+        const projects = await Project.find({email:email})
         return projects
     }else{
-        const projects = await Project.find({}, {id: true,project_name:true})
+        const projects = await Project.find({}, {project_name:true})
         return projects
     }
 }

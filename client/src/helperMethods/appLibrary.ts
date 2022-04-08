@@ -1,9 +1,9 @@
 
 import { Project } from "../app/slices/appSlice";
 
-export const getProjectName = (projectId : number, projects : Project[]) => {
+export const getProjectName = (projectId : string, projects : Project[]) => {
 
-    const project = projects.find((project: Project) => projectId === project.id);
+    const project = projects.find((project: Project) => projectId === project._id);
 
     if(project){
         return project.project_name
@@ -18,7 +18,7 @@ export const getProjectId = (projectName : any, projects : Project[]) => {
       );
 
       if(project) {
-          return project.id;
+          return project._id;
       }
-      else return 0;
+      else return "";
 }

@@ -14,5 +14,5 @@ export default interface Itimereport extends Document {
   time: Date;
   description: string;
   hours: number;
-  project_id: number;
+  project_id: string;
 }

@@ -110,7 +110,7 @@ const EditTimeReportRow = ({
     );
 
     if (project) {
-      updateTimeReport({ ...timeReport, project_id: project.id });
+      updateTimeReport({ ...timeReport, project_id: project._id });
     }
   };
 
