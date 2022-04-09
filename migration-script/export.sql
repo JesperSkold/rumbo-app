@@ -12,6 +12,6 @@ SELECT row_to_json(projects) FROM (SELECT customer_name, project_name, agreement
 
 /*EXPORT SCRIPT FOR TRANSACTIONS*/
 COPY (
-SELECT row_to_json(transactions) FROM (SELECT email, time, amount, description, created_at, status, source_reference FROM transactions) as transactions
+SELECT row_to_json(transactions) FROM (SELECT email, time, amount, description, status FROM transactions) as transactions
 ) TO '/tmp/transactions.json' WITH (FORMAT text, HEADER false)
 /*EXPORT SCRIPT FOR TRANSACTIONS*/

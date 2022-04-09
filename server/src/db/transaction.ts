@@ -64,8 +64,10 @@ return await TransactionModel.find(queries)
 //   return await query(sqlQuery, params);
 // };
 
-export const getTransactionById = async (transactionId: number) => {
-  const result = TransactionModel.find({'id': transactionId})
+export const getTransactionById = async (transactionId: string) => {
+  const result = await TransactionModel.find({'_id': transactionId})
+  console.log(result, "FROM QUERY");
+  
   return result['length'] === 0 ? null : result[0];
 };
 /*
@@ -75,8 +77,8 @@ export const getTransactionById = async (transactionId: string) => {
 };
 */
 
-export const deleteTransactionById = async (transactionId: number) => {
-  await TransactionModel.deleteOne({'id': transactionId}) 
+export const deleteTransactionById = async (transactionId: string) => {
+  await TransactionModel.deleteOne({'_id': transactionId}) 
 };
 /*
 export const deleteTransactionById = async (transactionId: string) => {

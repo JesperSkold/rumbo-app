@@ -10,13 +10,15 @@ router.delete("/:transactionId", async (req, res) => {
       res.sendStatus(401).end();
     } else {
   
-      const transactionId = Number(req.params.transactionId);
-      console.log(transactionId);
+      const transactionId = req.params.transactionId;
+      console.log(transactionId, "HI FROM TRANSACTION ROUTER");
   
-      if (!Number.isInteger(transactionId)) {
+      if (Number.isInteger(transactionId)) {
         return res.sendStatus(400);
       } else {
-        const transaction = await getTransactionById(Number(transactionId));
+        const transaction = await getTransactionById(transactionId);
+        console.log(transaction, "HEY FROM LINE 20 ROUTER TRANSACTION");
+        
         if (!transaction) {
           res.sendStatus(404);
         } else {
