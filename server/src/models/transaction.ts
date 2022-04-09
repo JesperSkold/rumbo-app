@@ -1,14 +1,17 @@
 import mongoose, { Schema } from "mongoose"
-import Itransaction from "../interfaces/transaction"
+// import Itransaction from "../interfaces/transaction"
+import { Transaction } from "../types"
 
-const descriptionSchema: Schema = new Schema ({ //rename descriptionSchema to transactionSchema
+const transactionSchema: Schema = new Schema ({ //rename descriptionSchema to transactionSchema
   email:{type: String, required: true}, 
-  time:{type: Number, required:true},
+  time:{type: Date, required:true},
   amount:{type: Number, required:true},
   description:{type: String, required:true}, 
-  created_at:{type: Date, required:true}, 
-  status:{type: Number, required:true}, 
-  source_reference:{type : { preference1 : String}, default : null}
+  created_at:{type: Date}, 
+  sum:{type: Number},
+  source_reference:{type: String},
+  status:{type: Number}, 
+  // source_reference:{type : { preference1 : String}, default : null}
 })
 
-export default mongoose.model<Itransaction>("Transaction", descriptionSchema)
+export default mongoose.model<Transaction>("Transaction", transactionSchema)

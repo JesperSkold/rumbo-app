@@ -8,4 +8,4 @@ export default interface Itransaction extends Document{
   created_at: Date,
   status: number
   source: string,
-}
+} //not in use, using type from types/index instead for model

@@ -26,6 +26,8 @@ router.get("/:email/transaction", async (req, res) => {
       filter.description = req.query.description;
     }
     const transactions = await getTransactions(filter);
+    console.log(transactions, "HELLO FROM TRANSACTIONS USERS");
+    
     res.json(transactions);
   }
 });

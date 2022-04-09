@@ -43,6 +43,9 @@ router.delete("/:transactionId", async (req, res) => {
     if (req.query.month) {
       filter.month = req.query.month;
     }
+    console.log(filter,"FILTER FROM TRANSACROUTER");
+    console.log(req.query,"queries FROM TRANSACROUTER");
+    
     getTransactions(filter).then((transactions) => res.json(transactions));
   });
 
@@ -61,7 +64,8 @@ router.delete("/:transactionId", async (req, res) => {
         amount: req.body.amount,
         description: req.body.description,
       });
-  
+      console.log(newTransaction, "HI FROM NEWTRANSACTION ROUTER");
+      
       res.json(newTransaction[0]);
     }
   });
