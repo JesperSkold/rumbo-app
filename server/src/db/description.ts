@@ -1,4 +1,3 @@
-import { query } from "./db";
 import Transaction from "../models/transaction"
 export const getDescriptionsByEmail = async (myEmail: string) => {
     const emailStr = myEmail

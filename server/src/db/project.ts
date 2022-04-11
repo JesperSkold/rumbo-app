@@ -1,4 +1,3 @@
-import { query } from "./db";
 import Project from "../models/project"
 
 

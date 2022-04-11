@@ -1,4 +1,3 @@
-import { query } from "./db";
 import { TimeReport } from "../types";
 import TimeReportModel from "../models/timereport";
 

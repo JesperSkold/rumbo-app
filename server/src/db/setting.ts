@@ -1,5 +1,3 @@
-import { query } from "./db";
-import { Transaction } from "../types";
 import SettingModel from '../models/setting'
 
 type Setting = {
