@@ -1,13 +1,5 @@
 import { Document } from "mongoose"
 
-//   id: number,
-//   email:string,
-//   time:string, //string or date or w/e?
-//   hours:number,
-//   description:string,
-//   created_at: Date,
-//   project_id:string
-// }
 export default interface Itimereport extends Document {
   _id?: string,
   email: string;

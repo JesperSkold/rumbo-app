@@ -14,14 +14,6 @@ export const getSetting = async (key: string) => {
  return result.length ? result[0].value : null; 
 }
 
-// export const getSetting = async (key: string) => {
-//   const sqlQuery = `SELECT * FROM public.settings WHERE key = $1`;
-//   const result = await query(sqlQuery, [ key ]) as Setting[];
-//   return result.length ? result[0].value : null;
-// };
-
-
-
 export const setSetting = async (key: string, value: string) => {
   const createdSetting = await SettingModel.create({
     key:key,
@@ -30,12 +22,3 @@ export const setSetting = async (key: string, value: string) => {
   createdSetting.save()
 }
 
-// export const setSetting = (key: string, value: string) => {
-//   return query(
-//     `INSERT INTO public.settings(key, value) VALUES($1, $2) ON CONFLICT ("key") DO UPDATE SET value = $2`,
-//     [
-//       key,
-//       value
-//     ]
-//   );
-// };

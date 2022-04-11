@@ -33,7 +33,7 @@ app.use('/transaction', transactionRouter);
 app.use('/user', userRouter);
 app.use('/visma', vismaRouter);
 app.use('/', timeReportRouter);
-app.use('/employee', employeeRouter); // 3 dots next to name, render employees
+app.use('/employee', employeeRouter);
 
 
 
@@ -41,7 +41,7 @@ if (process.env.VISMA_IMPORT_FEATURE === 'true') {
   refreshToken();
 }
 
-app.get('/project-list', async (req, res) => { //renderar projekt i admin tab
+app.get('/project-list', async (req, res) => {
   if (!req["isAdmin"]) {
     res.send(401).end();
     

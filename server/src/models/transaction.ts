@@ -1,8 +1,7 @@
 import mongoose, { Schema } from "mongoose"
-// import Itransaction from "../interfaces/transaction"
 import { Transaction } from "../types"
 
-const transactionSchema: Schema = new Schema ({ //rename descriptionSchema to transactionSchema
+const transactionSchema: Schema = new Schema ({
   email:{type: String, required: true}, 
   time:{type: Date, required:true},
   amount:{type: Number, required:true},
@@ -11,7 +10,6 @@ const transactionSchema: Schema = new Schema ({ //rename descriptionSchema to tr
   sum:{type: Number},
   source_reference:{type: String},
   status:{type: Number}, 
-  // source_reference:{type : { preference1 : String}, default : null}
 })
 
 export default mongoose.model<Transaction>("Transaction", transactionSchema)
