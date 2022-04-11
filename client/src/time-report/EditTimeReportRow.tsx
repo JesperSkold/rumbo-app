@@ -67,7 +67,12 @@ const EditTimeReportRow = ({
  
   const submitTimeReport = (timeReport: TimeReport) => {
     if (isFormValid(timeReport)) {
+      
+      if (timeReport._id.length > 0) {
+        dispatch(saveUpdatedTimeReport(timeReport))
+      }else{
         saveTimeReport(timeReport);
+      }
     }
   };
 

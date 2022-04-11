@@ -55,6 +55,6 @@ export const addTimeReport = async (timeReport: TimeReport) => {
 };
 
 export const updateTimeReport = async (timeReport: TimeReport, id:string) => {
-	const doc = await TimeReportModel.findOneAndUpdate( timeReport)
-	return doc 
+	await TimeReportModel.findByIdAndUpdate(id, timeReport)
+	return await getTimeReportById(id) 
 };
