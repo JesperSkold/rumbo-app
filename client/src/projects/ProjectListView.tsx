@@ -17,7 +17,6 @@ const ProjectListView = ({ user }: ProjectViewType) => {
   const dispatch = useDispatch();
 
   let params = useParams();
-  console.log("test", params);
   const timeReportMeta = useSelector((state: any) => state.timeReport.meta);
   const filter: DateFilter = useSelector(
     (state: any) => state.timeReport.filter
@@ -35,8 +34,6 @@ const ProjectListView = ({ user }: ProjectViewType) => {
 
   //Funktion för rendera om till ProjectView 
   const getProjectView = (id: string) => {
-    console.log(id, "ID FROM GETPROJECTVIEW");
-    
     dispatch(push(`/project/${id}`))
   }
 

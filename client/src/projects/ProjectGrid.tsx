@@ -12,7 +12,6 @@ const ProjectGrid = () => {
 
   // TODO Senare: Hämta endast de employees som är kopplade till projektet.
   const employees = useSelector((state: any) => state.app.employees);
-  //console.log(employees);
   employees.map((em: Employee) => console.log(em));
 
   const filter = useSelector((state: any) => state.timeReport.filter);

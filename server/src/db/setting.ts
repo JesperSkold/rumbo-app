@@ -27,7 +27,6 @@ export const setSetting = async (key: string, value: string) => {
     key:key,
     value:value
   })
-  console.log(createdSetting);
   createdSetting.save()
 }
 

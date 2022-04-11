@@ -11,13 +11,11 @@ router.delete("/:transactionId", async (req, res) => {
     } else {
   
       const transactionId = req.params.transactionId;
-      console.log(transactionId, "HI FROM TRANSACTION ROUTER");
   
       if (Number.isInteger(transactionId)) {
         return res.sendStatus(400);
       } else {
         const transaction = await getTransactionById(transactionId);
-        console.log(transaction, "HEY FROM LINE 20 ROUTER TRANSACTION");
         
         if (!transaction) {
           res.sendStatus(404);
@@ -45,8 +43,6 @@ router.delete("/:transactionId", async (req, res) => {
     if (req.query.month) {
       filter.month = req.query.month;
     }
-    console.log(filter,"FILTER FROM TRANSACROUTER");
-    console.log(req.query,"queries FROM TRANSACROUTER");
     
     getTransactions(filter).then((transactions) => res.json(transactions));
   });
@@ -66,7 +62,6 @@ router.delete("/:transactionId", async (req, res) => {
         amount: req.body.amount,
         description: req.body.description,
       });
-      console.log(newTransaction, "HI FROM NEWTRANSACTION ROUTER");
       
       res.json(newTransaction[0]);
     }

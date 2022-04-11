@@ -25,7 +25,6 @@ if(description){
   queries['description'] =  `/^${description}/i` //'$regex' : '.*' + description + '.*', '$options' : 'i'
 }
 
-console.log(description, "description from gettransactons");
 
 return await TransactionModel.find(queries)
 }
@@ -66,8 +65,6 @@ return await TransactionModel.find(queries)
 
 export const getTransactionById = async (transactionId: string) => {
   const result = await TransactionModel.find({'_id': transactionId})
-  console.log(result, "FROM QUERY");
-  
   return result['length'] === 0 ? null : result[0];
 };
 /*

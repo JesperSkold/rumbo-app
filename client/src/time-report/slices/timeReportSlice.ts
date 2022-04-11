@@ -51,8 +51,6 @@ export const fetchTimeReportsMeta: any = createAsyncThunk(
 export const saveNewTimeReport: any = createAsyncThunk<any, TimeReport>(
   "timereport/create",
   async ({ user, timeReport }: any, thunkAPI) => {
-    console.log(user, timeReport, "USER TIMEREPORT FROM SAVENEWTIMEREPORT");
-    
     const state: any = thunkAPI.getState();
     const response = await postTimeReport(
       state.authentication.jwtIdToken,
@@ -76,8 +74,6 @@ export const saveUpdatedTimeReport: any = createAsyncThunk<any, TimeReport>(
 export const removeTimeReport: any = createAsyncThunk<any, TimeReport>(
   "timereport/remove",
   async ({ user, timeReport }: any, thunkAPI) => {
-    console.log(timeReport);
-    
     const state: any = thunkAPI.getState();
     const response = await deleteTimeReport(
       state.authentication.jwtIdToken,

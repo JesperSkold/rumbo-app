@@ -26,7 +26,6 @@ router.get("/:email/transaction", async (req, res) => {
       filter.description = req.query.description;
     }
     const transactions = await getTransactions(filter);
-    console.log(transactions, "HELLO FROM TRANSACTIONS USERS");
     
     res.json(transactions);
   }
@@ -59,11 +58,7 @@ router.get("/:email/timereport", async (req, res) => { // "renderar" timmar tabb
       filter.project = req.query.project_id;
     }
     const timeReport = await getTimeReport(filter);
-    console.log(timeReport, "<----TIME REPORTS");
-    // let timeReportArr = []
-    // timeReportArr.push(timeReport)
-    // const mappedReports = timeReportArr.map((timereport) => ({ ...timereport, hours: Number(timereport.hours) }))
-    // res.json(mappedReports["_doc"]);
+   
     res.json(timeReport);
   }
 

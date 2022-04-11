@@ -48,8 +48,6 @@ app.get('/project-list', async (req, res) => { //renderar projekt i admin tab
   }
   else {
     const projects = await getProjects();
-    console.log(projects);
-    
     res.json(projects);
   }
 });
@@ -68,8 +66,6 @@ app.get('/user/:email/description', async (req, res) => {
     res.send(401).end();
   } else {
     const response: any = await getDescriptionsByEmail(req.params.email);
-    console.log(response, "<-- DESCRIPIONS");
-    
     res.json(response.map((transaction: any) => transaction.description));
   }
 });

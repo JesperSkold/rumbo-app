@@ -35,8 +35,6 @@ export const getTimeReportsMeta = (jwtToken: string, email: string) => {
 
 export const postTimeReport = (jwtToken: string,
     timeReport: TimeReport) => {
-        console.log(timeReport, "FROMPOST");
-        
     return fetch(`${process.env.REACT_APP_API_BASE_URL}/timeReport`, {
         method: 'POST',
         body: JSON.stringify(timeReport),
@@ -45,7 +43,6 @@ export const postTimeReport = (jwtToken: string,
 };
 
 export const updateTimeReport = (jwtToken: string, timeReport: TimeReport) => {
-    console.log(timeReport, "FROMPOST");
     return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport._id}`, {
         method: 'PUT',
         body: JSON.stringify(timeReport),

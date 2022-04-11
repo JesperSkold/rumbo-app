@@ -80,10 +80,7 @@ return await TimeReportModel.find(queries)
 }
 
 export const getTimeReportById = async (timeReportId: string) => {
-	console.log(timeReportId, "FROM ID")
     const result = await TimeReportModel.find({_id: timeReportId}) //Change ID
-    console.log(result["length"], "<---- LNGTH");
-    
 	return result["length"] === 0 ? null : result[0];
 	
 
@@ -92,7 +89,6 @@ export const getTimeReportById = async (timeReportId: string) => {
 
 
 export const deleteTimeReportById = async (timeReportId: string) => {
-	console.log(timeReportId, "FROM ID")
 	await TimeReportModel.deleteOne({ _id: timeReportId }); //Change ID
 };
 
@@ -124,7 +120,6 @@ export const getTimeReportMeta = async (email: string) => {
 
 
 export const addTimeReport = async (timeReport: TimeReport) => { //do next
-    console.log(timeReport, "<--TIME REPORT");
     const createdTimeReport = new TimeReportModel(timeReport)
     // const createdTimeReport = await TimeReportModel.create({
     //     id: timeReport.id,
@@ -134,7 +129,6 @@ export const addTimeReport = async (timeReport: TimeReport) => { //do next
     //     hours: timeReport.hours,
     //     'project_id': timeReport.id,
     // })
-    console.log(createdTimeReport, "CREATED TIME REPORT");
     await createdTimeReport.save()
     
     return createdTimeReport

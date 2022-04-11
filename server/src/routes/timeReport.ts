@@ -39,7 +39,6 @@ router.post("/timereport", async (req, res) => {
       hours: req.body.hours,
       project_id: req.body.project_id
     }) as TimeReport;
-    console.log(newTimeReport, "NEWTIMEREPORT ROUTER");
     let timeReportArr = []
     timeReportArr.push(newTimeReport)
     
@@ -51,15 +50,12 @@ router.post("/timereport", async (req, res) => {
 });
 
 router.put("/:email/timereport/:id", async (req, res) => {
-console.log(req.body, "HI FROM REQ BODY");
 
   if (req.body.email != req["user"] && !req["isAdmin"]) {
-    console.log("ERROR FROM 56");
     
     res.sendStatus(401).end();
   } else {
     const errors = validationResult(req);
-    console.log(validationResult(req), "error from validation 62");
     if (!errors.isEmpty()) {
       
       return res.status(400).json({ errors: errors.array() });
@@ -72,8 +68,6 @@ console.log(req.body, "HI FROM REQ BODY");
       description: req.body.description,
       project_id: req.body.project_id,
     }, req.params.id);
-    console.log(updatedTimeReport, "UPDATEDTIMEREPORT");
-    console.log(req.params.id, "HELLO PARAMS ID");
     
     res.json(updatedTimeReport);
   }
@@ -86,7 +80,6 @@ router.delete("/:email/timereport/:timeReportId", async (req, res) => {
   } else {
 
     const timeReportId = req.params.timeReportId;
-    console.log(timeReportId);
 
     if (Number.isInteger(timeReportId)) {
       return res.sendStatus(400);
