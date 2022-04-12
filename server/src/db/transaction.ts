@@ -25,7 +25,6 @@ if(description){
   queries['description'] =  `/^${description}/i`
 }
 
-
 return await TransactionModel.find(queries)
 }
 

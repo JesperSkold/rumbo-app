@@ -9,7 +9,7 @@ const transactionSchema: Schema = new Schema ({
   created_at:{type: Date}, 
   sum:{type: Number},
   source_reference:{type: String},
-  status:{type: Number}, 
+  status:{type: Number},
 })
 
 export default mongoose.model<Transaction>("Transaction", transactionSchema)
