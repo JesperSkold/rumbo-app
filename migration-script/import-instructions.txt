@@ -1,8 +1,24 @@
-1. Gå in i mappen där du har migrations-scripten.
+GÖR DENNA OM EN MIGRATION-SCRIPTS MAPP MED JSON-FILER EXISTERAR
+Kör copy funktionen med rows_to_json i postgres databasen, spara ner till /tmp/filnamn.json
+Gå in i postgres containern docker exec -t postgrescontainerid /bin/bash
+1. Gå in i mappen där du har migrations-scripten i repot.
 2. Slå kommandot: docker cp filnamn.json mongocontainerid:tmp/filnamn.json
 3. Gå in i mongodb med: docker exec -it mongocontainerid /bin/bash
 4. Slå kommandot cd tmp
 5. Slå kommandot mongoimport filnamn.json --db mongodatabasnamnet --collection employees
+
+-------------------------------------------------------------------------------------------------
+
+GÖR DENNA OM EN MIGRATION-SCRIPTS MAPP MED JSON-FILER INTE EXISTERAR
+1. Kör copy funktionen med rows_to_json i postgres databasen, spara ner till /tmp/filnamn.json
+2. Skapa en migrations mapp i repot och gå in i den mappen
+3. Kopiera json datan med docker cp postgrescontainerid:/tmp/filnamn.json filnamn.json
+4. Slå kommandot: docker cp filnamn.json mongocontainerid:tmp/filnamn.json
+5. Gå in i mongodb med: docker exec -it mongocontainerid /bin/bash
+6. Slå kommandot cd tmp
+7. Slå kommandot mongoimport filnamn.json --db mongodatabasnamnet --collection employees
+
+------------------------------------------------------------------------------------------------
 
 Om transactions date formatet knasar så kör detta i mongo databasen: db.transactions.updateMany(
   { },
